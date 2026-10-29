@@ -1,14 +1,16 @@
-# PRD & Prototype Sprint
+# PRD & Prototype Sprint (Module 4)
 
-> **Module 4 · Lab 2.** Repo file `04-roadmap/prd-and-prototype.md` — part of your submission.
-> Do the lab in the **Module 4 · Exercise 2 Guide** (linked from the Module 4 deck), then click **⬇ Download .md** — it saves as this exact file. Commit it here.
-> It deepens the top feature from your `roadmap-prd-prototype.md` and feeds the **Roadmap, PRD & Prototype** slide of your Module 6 deck.
+## Pick & scope with MoSCoW
+- **The “Now” feature I’m scoping (name + one-line core description):** One-Click Compliance Checklist (narrow scope) feature. It pre-fills the compliance checklist from existing stop and route data, so drivers confirm it in one click instead of spending 14.6 minutes filling it in.
+- **My finalized Must-Haves (after overriding the AI):** M1: Pre-fill every field that can be derived from existing stop and route data
+M2: One-tap confirm and submit, writing the same compliance record the app writes today
+M3: Driver can edit any pre-filled value before submitting
+- **What I demoted from Must → Should/Won’t, and why:** M4: No lost work. progress survives the app closing or crashing, and a failed submit keeps the entries and says so. 
+Not an ideal choice to demote but given the 4 week sprint, it is a challenge to pin the root cause, test and deliver.  It is also not essential to the core speed gain
 
-## Responses
+## Generate your Simplified PRD
+- **One thing my PRD makes explicit that a vague brief would have missed:** The UI elements associated with the User Stories
 
-- **The "Now" feature I'm scoping (name + one-line core description):** _(not filled in)_
-- **My finalized Must-Haves (after overriding the AI):** _(not filled in)_
-- **What I demoted from Must → Should/Won't, and why:** _(not filled in)_
-- **One thing my PRD makes explicit that a vague brief would have missed:** _(not filled in)_
-- **Where the prototype revealed a gap in my PRD logic (what I updated):** _(not filled in)_
-- **My shareable prototype URL:** _(not filled in)_
+## Prompt-to-prototype sprint
+- **Where did the prototype reveal a gap in my PRD logic? (what I had to update):** Submission receipt
+- **My prototype, as a link or a screenshot (publish or share from your tool; in Lovable that is Share → Share Preview, in Bolt Publish → Web. No share URL? Screenshot the working flow):** https://lovable.dev/preview/6TRrA1xSpU6FJTpqk60F7m1Q7T58KNBL

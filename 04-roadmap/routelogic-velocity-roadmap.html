@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RouteLogic Velocity Roadmap</title>
+<style>
+  :root {
+    --bg: #f5f6f8;
+    --surface: #ffffff;
+    --ink: #14181f;
+    --ink-2: #4a5362;
+    --ink-3: #7b8494;
+    --line: #e2e5ea;
+    --brand: #0b5fff;
+    --now: #0b5fff;
+    --next: #7a4dff;
+    --later: #6b7686;
+    --cut: #c2362f;
+    --qw-bg: #e3f6ea;  --qw-fg: #12713a;  --qw-bd: #b6e4c7;
+    --fi-bg: #e4eefe;  --fi-fg: #1b4fb8;  --fi-bd: #bcd3fb;
+    --mp-bg: #efe8ff;  --mp-fg: #5a34c4;  --mp-bd: #d6c7fb;
+    --ts-bg: #fde8e6;  --ts-fg: #b0302a;  --ts-bd: #f6c4bf;
+    --shadow: 0 1px 2px rgba(20,24,31,.06), 0 4px 14px rgba(20,24,31,.05);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1218;
+      --surface: #171b23;
+      --ink: #eef1f6;
+      --ink-2: #b4bccb;
+      --ink-3: #8691a3;
+      --line: #272d38;
+      --brand: #5b8cff;
+      --now: #5b8cff;
+      --next: #a58aff;
+      --later: #8c97a8;
+      --cut: #ff7b72;
+      --qw-bg: #12301f;  --qw-fg: #6fdc9a;  --qw-bd: #1f5a3a;
+      --fi-bg: #14284d;  --fi-fg: #8fb4ff;  --fi-bd: #23447f;
+      --mp-bg: #261c4a;  --mp-fg: #b9a5ff;  --mp-bd: #403075;
+      --ts-bg: #3a1c1a;  --ts-fg: #ff9c94;  --ts-bd: #6a2f2b;
+      --shadow: none;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 32px 24px 56px; }
+
+  header { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
+  .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--brand); }
+  h1 { margin: 4px 0 6px; font-size: 30px; line-height: 1.15; letter-spacing: -.02em; }
+  .meta { color: var(--ink-2); font-size: 14px; }
+  .meta b { color: var(--ink); font-weight: 600; }
+
+  .toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 22px; }
+  .toolbar .label { font-size: 12px; font-weight: 600; color: var(--ink-3); text-transform: uppercase; letter-spacing: .08em; margin-right: 4px; }
+  .chip {
+    appearance: none; cursor: pointer;
+    border: 1px solid var(--line); background: var(--surface); color: var(--ink-2);
+    font: inherit; font-size: 13px; font-weight: 600;
+    padding: 6px 12px; border-radius: 999px;
+    display: inline-flex; align-items: center; gap: 7px;
+    transition: border-color .15s, background .15s, color .15s;
+  }
+  .chip:hover { border-color: var(--ink-3); }
+  .chip:focus-visible, .card:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+  .chip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ink-3); }
+  .chip[data-q="Quick Win"] .dot { background: var(--qw-fg); }
+  .chip[data-q="Fill-In"] .dot { background: var(--fi-fg); }
+  .chip[data-q="Major Project"] .dot { background: var(--mp-fg); }
+  .chip[data-q="Time Sinker"] .dot { background: var(--ts-fg); }
+  .chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .chip[aria-pressed="true"] .dot { box-shadow: 0 0 0 2px var(--bg); }
+  .chip .n { font-weight: 500; opacity: .7; }
+
+  .board { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; align-items: start; }
+  .lane { background: color-mix(in srgb, var(--surface) 55%, var(--bg)); border: 1px solid var(--line); border-radius: 16px; padding: 14px; }
+  .lane-head { padding: 4px 4px 12px; border-bottom: 3px solid var(--lane); margin-bottom: 14px; }
+  .lane[data-lane="now"] { --lane: var(--now); }
+  .lane[data-lane="next"] { --lane: var(--next); }
+  .lane[data-lane="later"] { --lane: var(--later); }
+  .lane-title { display: flex; align-items: center; justify-content: space-between; }
+  .lane-title h2 { margin: 0; font-size: 15px; letter-spacing: .1em; color: var(--lane); }
+  .count { font-size: 12px; font-weight: 700; color: var(--ink-2); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 1px 9px; }
+  .lane-sub { margin: 3px 0 0; font-size: 13px; color: var(--ink-2); }
+
+  .cards { display: grid; gap: 12px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+    padding: 14px 15px 13px; box-shadow: var(--shadow);
+    cursor: pointer; text-align: left; width: 100%; font: inherit; color: inherit;
+    transition: transform .15s, border-color .15s, opacity .2s;
+    border-left: 4px solid var(--lane, var(--line));
+    appearance: none;
+  }
+  .card:hover { transform: translateY(-1px); border-color: var(--ink-3); border-left-color: var(--lane, var(--line)); }
+  .card.hidden { display: none; }
+  .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+  .id { font-size: 12px; font-weight: 700; color: var(--ink-3); letter-spacing: .04em; }
+  .name { margin: 1px 0 0; font-size: 16px; font-weight: 650; line-height: 1.3; }
+  .badge {
+    flex: none; font-size: 11px; font-weight: 700; letter-spacing: .03em;
+    padding: 3px 9px; border-radius: 999px; border: 1px solid; white-space: nowrap;
+  }
+  .badge.q-qw { background: var(--qw-bg); color: var(--qw-fg); border-color: var(--qw-bd); }
+  .badge.q-fi { background: var(--fi-bg); color: var(--fi-fg); border-color: var(--fi-bd); }
+  .badge.q-mp { background: var(--mp-bg); color: var(--mp-fg); border-color: var(--mp-bd); }
+  .badge.q-ts { background: var(--ts-bg); color: var(--ts-fg); border-color: var(--ts-bd); }
+  .why { margin: 9px 0 0; font-size: 13.5px; color: var(--ink-2); }
+  .scores { display: flex; gap: 14px; margin-top: 11px; padding-top: 10px; border-top: 1px dashed var(--line); font-size: 12px; color: var(--ink-3); }
+  .scores b { color: var(--ink); font-weight: 700; }
+  .scale { display: inline-flex; gap: 2px; vertical-align: middle; margin-left: 6px; }
+  .scale i { width: 10px; height: 5px; border-radius: 2px; background: var(--line); display: block; }
+  .scale i.on { background: var(--ink-2); }
+
+  .empty { display: none; padding: 16px 8px; font-size: 13px; color: var(--ink-3); text-align: center; }
+  .lane.is-empty .empty { display: block; }
+
+  .cutlist { margin-top: 26px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px; border-top: 4px solid var(--cut); }
+  .cutlist-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+  .cutlist h2 { margin: 0; font-size: 15px; letter-spacing: .1em; color: var(--cut); }
+  .cutlist .sub { font-size: 13px; color: var(--ink-2); }
+  .cut-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 22px; }
+  .cut-item { display: grid; grid-template-columns: auto 1fr; gap: 3px 12px; padding: 12px 0; border-top: 1px solid var(--line); }
+  .cut-item.hidden { display: none; }
+  .cut-item .id { grid-row: 1; padding-top: 2px; }
+  .cut-item .head { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+  .cut-item .name { text-decoration: line-through; text-decoration-color: color-mix(in srgb, var(--cut) 55%, transparent); text-decoration-thickness: 1.5px; font-size: 15px; }
+  .cut-item .why { grid-column: 2; margin: 0; font-size: 13px; }
+
+  footer { margin-top: 22px; font-size: 12px; color: var(--ink-3); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+
+  @media (max-width: 920px) {
+    .board { grid-template-columns: 1fr; }
+    .cut-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .wrap { padding: 22px 16px 40px; }
+    h1 { font-size: 25px; }
+  }
+  @media print {
+    body { background: #fff; }
+    .toolbar { display: none; }
+    .card, .lane, .cutlist { box-shadow: none; break-inside: avoid; }
+    .card.hidden, .cut-item.hidden { display: block !important; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div>
+      <div class="eyebrow">RouteLogic Velocity</div>
+      <h1>Product Roadmap</h1>
+      <div class="meta"><b>Persona:</b> Frontline Delivery Drivers &nbsp;·&nbsp; <b>Team:</b> 2 engineers + 1 designer + 1 CS lead</div>
+    </div>
+  </header>
+
+  <div class="toolbar" role="group" aria-label="Filter by quadrant">
+    <span class="label">Filter</span>
+    <button class="chip" data-q="all" aria-pressed="true">All <span class="n" id="n-all"></span></button>
+    <button class="chip" data-q="Quick Win" aria-pressed="false"><span class="dot"></span>Quick Win <span class="n" id="n-qw"></span></button>
+    <button class="chip" data-q="Fill-In" aria-pressed="false"><span class="dot"></span>Fill-In <span class="n" id="n-fi"></span></button>
+    <button class="chip" data-q="Major Project" aria-pressed="false"><span class="dot"></span>Major Project <span class="n" id="n-mp"></span></button>
+    <button class="chip" data-q="Time Sinker" aria-pressed="false"><span class="dot"></span>Time Sinker <span class="n" id="n-ts"></span></button>
+  </div>
+
+  <main class="board" id="board"></main>
+
+  <section class="cutlist" aria-labelledby="cut-title">
+    <div class="cutlist-head">
+      <h2 id="cut-title">CUT LIST</h2>
+      <span class="sub">Out of scope for Velocity. No capacity allocated.</span>
+    </div>
+    <div class="cut-grid" id="cutgrid"></div>
+  </section>
+
+  <footer>
+    <span>Quadrant rules: Value &ge; 4 is high, Effort &le; 2 is low. Scores are 1 to 5.</span>
+    <span>Click a card to toggle its scores.</span>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var QUAD = {
+    "Quick Win":     { cls: "q-qw", key: "qw" },
+    "Fill-In":       { cls: "q-fi", key: "fi" },
+    "Major Project": { cls: "q-mp", key: "mp" },
+    "Time Sinker":   { cls: "q-ts", key: "ts" }
+  };
+
+  var LANES = [
+    { id: "now",   title: "NOW",   sub: "Pilot (4 weeks, 3 accounts)" },
+    { id: "next",  title: "NEXT",  sub: "GA Release (weeks 5-8)" },
+    { id: "later", title: "LATER", sub: "Backlog" }
+  ];
+
+  var FEATURES = [
+    { id: "B1",  lane: "now",   name: "One-Click Compliance Checklist", value: 5, effort: 2, quadrant: "Quick Win",
+      why: "Removes the 14.6-min step that pushes drivers back to paper and text. It is the most direct lever on in-app completion rate, scoped to pre-fill only so it can ship in time to be measured." },
+    { id: "B5",  lane: "next",  name: "Step Progress Indicator", value: 2, effort: 1, quadrant: "Fill-In",
+      why: "Low-cost polish that improves orientation but won\u2019t move completion rate in the pilot window. Only if there is spare capacity." },
+    { id: "B7",  lane: "next",  name: "Contextual AI ETA Display", value: 3, effort: 2, quadrant: "Fill-In",
+      why: "Protects the enterprise-feature guardrail at low cost by putting an existing capability (11% adoption) in front of drivers. It stays passive so it doesn\u2019t add friction to core actions." },
+    { id: "B3",  lane: "later", name: "Shift Handoff Wizard", value: 3, effort: 3, quadrant: "Time Sinker",
+      why: "A credible time saving (~6.8 min/day) that sits outside the stop-completion flow. Revisit once core actions are dependable." },
+    { id: "B6",  lane: "later", name: "Driver Alert Notifications", value: 3, effort: 4, quadrant: "Time Sinker",
+      why: "Reliable alerts build the trust that replaces paper, but that trust accrues over weeks and the build exceeds the pilot. Start post-pilot with compliance-flag alerts, which reinforce B1." },
+    { id: "B9",  lane: "later", name: "Compliance Audit Trail Export", value: 2, effort: 3, quadrant: "Time Sinker",
+      why: "Serves auditors, not drivers. It becomes a low-cost by-product once B1 produces structured compliance data." },
+    { id: "B2",  lane: "cut",   name: "Smart Daily Report Auto-Fill", value: 3, effort: 4, quadrant: "Time Sinker",
+      why: "Serves the reporting guardrail but not the driver\u2019s core friction. AI scope cannot be delivered or measured in 4 weeks, so we are not spending pilot capacity on it." },
+    { id: "B4",  lane: "cut",   name: "Mobile-First Coordinator Dashboard", value: 2, effort: 5, quadrant: "Time Sinker",
+      why: "Targets coordinators, not our driver persona, and is the largest build on the list. It does not address why drivers keep paper." },
+    { id: "B8",  lane: "cut",   name: "Fleet Analytics Manager View", value: 1, effort: 5, quadrant: "Time Sinker",
+      why: "An executive and Sales-driven feature with no driver benefit and the highest cost. It does not serve the Velocity objective." },
+    { id: "B10", lane: "cut",   name: "In-App Coordinator Training", value: 1, effort: 3, quadrant: "Time Sinker",
+      why: "Aimed at the wrong persona and unrelated to driver trust or speed, so it falls outside the initiative\u2019s scope." }
+  ];
+
+  function el(tag, attrs, children) {
+    var n = document.createElement(tag);
+    Object.keys(attrs || {}).forEach(function (k) {
+      if (k === "class") n.className = attrs[k];
+      else if (k === "text") n.textContent = attrs[k];
+      else n.setAttribute(k, attrs[k]);
+    });
+    (children || []).forEach(function (c) { n.appendChild(c); });
+    return n;
+  }
+
+  function scale(n) {
+    var s = el("span", { "class": "scale", "aria-hidden": "true" });
+    for (var i = 1; i <= 5; i++) s.appendChild(el("i", { "class": i <= n ? "on" : "" }));
+    return s;
+  }
+
+  function badge(q) {
+    return el("span", { "class": "badge " + QUAD[q].cls, text: q });
+  }
+
+  function card(f) {
+    var c = el("button", { "class": "card", type: "button", "data-q": f.quadrant, "aria-expanded": "false" });
+    var left = el("div", {}, [
+      el("div", { "class": "id", text: f.id }),
+      el("h3", { "class": "name", text: f.name })
+    ]);
+    c.appendChild(el("div", { "class": "card-top" }, [left, badge(f.quadrant)]));
+    c.appendChild(el("p", { "class": "why", text: f.why }));
+
+    var scores = el("div", { "class": "scores" });
+    scores.hidden = true;
+    var v = el("span", {}, [document.createTextNode("Value "), el("b", { text: f.value + "/5" }), scale(f.value)]);
+    var e = el("span", {}, [document.createTextNode("Effort "), el("b", { text: f.effort + "/5" }), scale(f.effort)]);
+    scores.appendChild(v); scores.appendChild(e);
+    c.appendChild(scores);
+
+    c.addEventListener("click", function () {
+      var open = c.getAttribute("aria-expanded") === "true";
+      c.setAttribute("aria-expanded", open ? "false" : "true");
+      scores.hidden = open;
+    });
+    return c;
+  }
+
+  var board = document.getElementById("board");
+  LANES.forEach(function (l) {
+    var items = FEATURES.filter(function (f) { return f.lane === l.id; });
+    var lane = el("section", { "class": "lane", "data-lane": l.id, "aria-label": l.title + " lane" });
+    var head = el("div", { "class": "lane-head" }, [
+      el("div", { "class": "lane-title" }, [
+        el("h2", { text: l.title }),
+        el("span", { "class": "count", text: String(items.length) })
+      ]),
+      el("p", { "class": "lane-sub", text: l.sub })
+    ]);
+    var cards = el("div", { "class": "cards" });
+    items.forEach(function (f) { cards.appendChild(card(f)); });
+    lane.appendChild(head);
+    lane.appendChild(cards);
+    lane.appendChild(el("div", { "class": "empty", text: "No items match this filter." }));
+    board.appendChild(lane);
+  });
+
+  var cutgrid = document.getElementById("cutgrid");
+  FEATURES.filter(function (f) { return f.lane === "cut"; }).forEach(function (f) {
+    var item = el("div", { "class": "cut-item", "data-q": f.quadrant });
+    item.appendChild(el("span", { "class": "id", text: f.id }));
+    item.appendChild(el("div", { "class": "head" }, [
+      el("span", { "class": "name", text: f.name }),
+      badge(f.quadrant)
+    ]));
+    item.appendChild(el("p", { "class": "why", text: f.why }));
+    cutgrid.appendChild(item);
+  });
+
+  /* counts */
+  document.getElementById("n-all").textContent = FEATURES.length;
+  Object.keys(QUAD).forEach(function (q) {
+    document.getElementById("n-" + QUAD[q].key).textContent =
+      FEATURES.filter(function (f) { return f.quadrant === q; }).length;
+  });
+
+  /* filtering */
+  var chips = Array.prototype.slice.call(document.querySelectorAll(".chip"));
+  function applyFilter(q) {
+    chips.forEach(function (c) { c.setAttribute("aria-pressed", String(c.getAttribute("data-q") === q)); });
+    var all = q === "all";
+    Array.prototype.forEach.call(document.querySelectorAll(".card, .cut-item"), function (n) {
+      n.classList.toggle("hidden", !all && n.getAttribute("data-q") !== q);
+    });
+    Array.prototype.forEach.call(document.querySelectorAll(".lane"), function (lane) {
+      var visible = lane.querySelectorAll(".card:not(.hidden)").length;
+      lane.classList.toggle("is-empty", visible === 0);
+    });
+  }
+  chips.forEach(function (c) {
+    c.addEventListener("click", function () { applyFilter(c.getAttribute("data-q")); });
+  });
+})();
+</script>
+</body>
+</html>
