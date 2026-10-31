@@ -1,53 +1,19 @@
-# Problem Hook & Value Proposition: [StreamLine / RouteLogic / your initiative]
+# Problem Hook & Value Proposition (Module 1)
 
-> **Module 1 · ★ Deliverable 1.** Repo file `01-product-thinking/problem-hook.md` — part of your submission.
-> Do the lab in the **Module 1 · Exercise 2 Guide** (linked from the Module 1 deck), then click **⬇ Download .md** — it saves as this exact file. Commit it here.
-> It becomes the **Problem, Value & Hypothesis** slide of your Module 6 final deck. (Your Module 1 · Exercise 1 discovery map lands in `strategic-map.md`.)
+## Responses
+- **Chosen path, which scenario are you committing to? (StreamLine or RouteLogic, or your own):** RouteLogic
+- **Strategic crisis, based on the brief, if the company does nothing for 12 months, what happens to its market position?:** If we do nothing for 12 months, the company will risks losing its position as the preferred operational platform and becoming a feature-rich but increasingly outdated incumbent. Competitors with simpler, faster workflows will continue winning frontline users, leading to declining engagement, increased churn risk among enterprise customers, and a perception that RouteLogic's complexity outweighs its value.
 
-## 1. Chosen scenario
+Key risk: The company becomes known for having the most features, but not for helping users get work done efficiently.
+- **Moment of misery, what is the user likely doing outside the product (Google, spreadsheets, a competitor) because your tool isn’t serving them?:** The user is likely to be bypassing RouteLogic altogether to complete urgent tasks faster. They may:
+- Export data into spreadsheets to manage routes more efficiently.
+- Use Google searches or internal documentation to find information that should be easy to access in the product.
+- Rely on email, messaging tools, or phone calls to coordinate drivers.
+- Trial or use a competitor's platform for day-to-day operational workflows.
+- **Problem hook, summarize the business risk and user pain into one urgent sentence.:** We must solve the growing risk of customer churn and market share loss by addressing the operational complexity that is reducing frontline adoption, driving customers to evaluate simpler competitors, and weakening our position as the platform of choice for fleet operations.
+- **Value proposition, based on the proposed initiative (Spotlight or Velocity), what is the new value and why is it urgent to launch now?:** For frontline fleet coordinators, we will help them complete time-sensitive operational tasks faster by surfacing only the tools they need and hiding unnecessary complexity, because users are already turning to simpler alternatives and enterprise customers are beginning to evaluate competitors.
 
-**Path:** _StreamLine Spotlight (B2C) · RouteLogic Velocity (B2B) · my own initiative_
-
-_One line on why you picked it._
-
-## 2. The strategic crisis
-
-_The big-picture business risk. If the company does nothing for 12 months, what happens to its market position?_
-
-> If we do nothing for 12 months, the company will…
-
-## 3. The moment of misery
-
-_The specific point where the product fails the user, forcing a manual workaround (Google, spreadsheets, group texts, a competitor)._
-
-> The user is currently forced to…
-
-## 4. Problem hook
-
-_One urgent sentence fusing the business risk and the user pain, your pitch for why this is the most important thing to work on right now._
-
-> We must solve [business risk] by addressing [user pain]…
-
-## 5. Value proposition
-
-_Who it's for, the new value, and why it's urgent to launch now._
-
-> For **[who]**, we will **[value]** because **[urgent why]**.
-
-## 6. Cold-read self-review
-
-_Read your hook back as a skeptical stakeholder. If you don't feel the urgency, that's your data._
-
-| Question | Your answer |
-|---|---|
-| Is the business risk high-stakes enough to justify a new initiative? | _____ |
-| Is the moment of misery systemic, or just an edge case? | _____ |
-| Does the value proposition actually remove the obstacle? | _____ |
-
-## 7. Finalized hypothesis _(complete in Module 3)_
-
-> Based on [qual + quant evidence], I believe that [solving X] for [persona] will result in [outcome], as measured by a [X%] change in [success metric]. I will protect [guardrail metric] and make a go/no-go decision after [decision window].
-
-## Link to full artifact
-
-_[link to your Problem Hook Builder export]_
+## Cold-read your own hook
+- **Is the business risk high enough to justify a new initiative, a high-stakes threat, or a minor inconvenience?:** I belivee the business risk is high enough to justify the initiative as the product complexity is creating a chain reaction. It is a growth and retention issue.
+- **Is the moment of misery a systemic problem or just an edge case?:** It is not an edge case as it's a recurring friction point in the product's primary job
+- **Does the value proposition actually remove the obstacle you identified, or is it a generic feature?:** It is not a generic feature. The value proposition removes the obsrtacle because it targets the root cause of the problem which is to remove friction from the core workflows that are driving users toward competitors. The proposed value directly addresses the obstacle causing declining adoption and increased churn risk. We want to focused on simplifying the highest-frequency operational tasks.
