@@ -25,12 +25,12 @@ Boundary: Weekly use must not fall more than 14% (median for AI predictive ETA f
 - **Isolation check, what has NOT changed? list everything identical between arms (app version, recommendation engine, notifications, onboarding). If something changed inadvertently, your test is compromised.:** the application version, the core application and the mark delivery flow
 
 ## Formalize your hypothesis & shipping criteria
-- **Your hypothesis (filled in):** I believe that reducing delivery confirmation to a single quick action for frontline drivers will result in the app becoming the place deliveries are recorded, with drivers marking stops done in one action instead of texting dispatch, as measured by a 20% relative increase in in-app completion rate (the share of completed stops marked complete in the app) within 90 days. We will protect weekly use of specialized enterprise features (reporting and AI predictive ETA) throughout the test, with no meaningful drop from baseline.
-- **Your shipping criteria (filled in):** We will SHIP if in-app completion rate improves by ≥ 5 percentage points (64% to 69% or higher) at 95% confidence (p < 0.05), and weekly use of reporting and AI predictive ETA does not fall more than 15% relative to baseline after 90 days.
+- **Your hypothesis (filled in):** I believe that a pre-filled, one-click compliance checklist for frontline delivery drivers will result in the app becoming the place deliveries are recorded, with drivers marking stops done in one action instead of texting dispatch, as measured by a 20% relative change in in-app completion rate (the share of completed stops marked complete in the app) within 4 weeks (pilot period). We will protect weekly use of reporting and AI predictive ETA throughout the test, with no more than a 15% relative drop from baseline.
+- **Your shipping criteria (filled in):** We will SHIP if in-app completion rate improves by ≥ 5 percentage points (64% to 69% or higher) at 95% confidence (p < 0.05), and weekly use of reporting and AI predictive ETA does not fall more than 15% relative to baseline after 4 weeks (pilot period).
 
 We will ITERATE if direction is positive but lift is below 5 percentage points.
 
 We will KILL if in-app completion rate shows no improvement or moves negatively.
 
-The read date is fixed at day 90, and no results are reviewed before this date.
+The read date is fixed at the end of week 4 of the pilot, and no results are reviewed before this date.
 - **Hardest parameter to define, and did it change your hypothesis? quick debrief:** increase in-app completion as this related to habitual change of the drivers. Reduced to 20%
