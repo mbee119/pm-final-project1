@@ -11,7 +11,7 @@ Key risk: The company becomes known for having the most features, but not for he
 - Rely on email, messaging tools, or phone calls to coordinate drivers.
 - Trial or use a competitor's platform for day-to-day operational workflows.
 - **Problem hook, summarize the business risk and user pain into one urgent sentence.:** We must solve the growing risk of customer churn and market share loss by addressing the operational complexity that is reducing frontline adoption, driving customers to evaluate simpler competitors, and weakening our position as the platform of choice for fleet operations.
-- **Value proposition, based on the proposed initiative (Spotlight or Velocity), what is the new value and why is it urgent to launch now?:** For frontline fleet coordinators, we will help them complete time-sensitive operational tasks faster by surfacing only the tools they need and hiding unnecessary complexity, because users are already turning to simpler alternatives and enterprise customers are beginning to evaluate competitors.
+- **Value proposition, based on the proposed initiative (Spotlight or Velocity), what is the new value and why is it urgent to launch now?:** For frontline drivers, we will help them complete time-sensitive operational tasks faster by surfacing only the tools they need and hiding unnecessary complexity, because users are already turning to simpler alternatives and enterprise customers are beginning to evaluate competitors.
 
 ## Cold-read your own hook
 - **Is the business risk high enough to justify a new initiative, a high-stakes threat, or a minor inconvenience?:** I belivee the business risk is high enough to justify the initiative as the product complexity is creating a chain reaction. It is a growth and retention issue.
